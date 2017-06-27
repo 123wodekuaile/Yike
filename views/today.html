@@ -1,18 +1,55 @@
 <div class="item">
-	<div class="mark">Aug 13</div>
-	<ul class="posts large">
+	<!-- 日期分类 -->
+	<div class="mark">{{date|date:'ddMMM'}}</div>
+	<ul class="posts">
 		<!-- 文章 -->
-		<li>
-			<span href="javascript:;" class="tag">去远方</span>
+		<li ng-repeat="post in posts">
+			<span href="javascript:;" class="tag" ng-if="post.column.name">{{post.column.name}}</span>
 			<div class="cont">
-				<h3>朝圣山南扎央宗--探索藏文化之源探索藏文化之源探索藏文化之源</h3>
+				<h3>{{post.title}}</h3>
 				<div class="brief">
-					<p>那里有个很窄的洞，钻进去曾是莲花生大师修行的地方，在藏民心中钻洞是为了洗清</p>
-					<div class="thumb">
-						<img src="./uploads/post_1.png" alt="">
+					<!-- !=10003 -->
+					<p ng-class="{only: post.display_style == 10001}" ng-if="post.display_style != 10003">{{post.abstract}}</p>
+					<!-- 10002 -->
+					<div class="thumb" ng-if="post.display_style == 10002">
+						<img ng-src="http://read.html5.qq.com/image?src=forum&q=5&r=0&imgflag=7&imageUrl={{post.thumbs[0].small.url}}" alt="">
+					</div>
+					<!-- 10003 -->
+					<div class="gallery" ng-if="post.display_style == 10003">
+						<div class="img-box" ng-repeat="thumb in post.thumbs">
+							<img ng-src="http://read.html5.qq.com/image?src=forum&q=5&r=0&imgflag=7&imageUrl={{thumb.small.url}}" alt="">
+						</div>
 					</div>
 				</div>
 			</div>
 		</li>
 	</ul>
 </div>
+
+<!--<div class="item">-->
+	<!--&lt;!&ndash; 日期分类 &ndash;&gt;-->
+	<!--<div class="mark" ng-show="loaded">{{date|date:'ddMMM'}}</div>-->
+	<!--<ul class="posts">-->
+		<!--&lt;!&ndash; 文章 &ndash;&gt;-->
+		<!--<li ng-repeat="post in posts">-->
+			<!--<span href="javascript:;" class="tag" ng-if="post.column.name">{{post.column.name}}</span>-->
+			<!--<div class="cont">-->
+				<!--<h3>{{post.title}}</h3>-->
+				<!--<div class="brief">-->
+					<!--&lt;!&ndash; !=10003 &ndash;&gt;-->
+					<!--<p ng-class="{only: post.display_style == 10001}" ng-if="post.display_style != 10003">{{post.abstract}}</p>-->
+					<!--&lt;!&ndash; 10002 &ndash;&gt;-->
+					<!--<div class="thumb" ng-if="post.display_style == 10002">-->
+						<!--<img ng-src="http://read.html5.qq.com/image?src=forum&q=5&r=0&imgflag=7&imageUrl={{post.thumbs[0].small.url}}" alt="">-->
+					<!--</div>-->
+					<!--&lt;!&ndash; 10003 &ndash;&gt;-->
+					<!--<div class="gallery" ng-if="post.display_style == 10003">-->
+						<!--<div class="img-box" ng-repeat="thumb in post.thumbs">-->
+							<!--<img ng-src="http://read.html5.qq.com/image?src=forum&q=5&r=0&imgflag=7&imageUrl={{thumb.small.url}}" alt="">-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</li>-->
+	<!--</ul>-->
+<!--</div>-->
